@@ -1,4 +1,5 @@
 import Client
+import json
 
 def onMessage(msg):
     if msg['R'] == 'checkinok':
@@ -7,14 +8,22 @@ def onMessage(msg):
         Client.sendall(b'{\"M\":\"pong\"}\n')
     if msg['R'] == 'ok':
         print('操作成功完成.')
+
     if msg['R'] == 'weather':
-        print('天气：' + msg['V'])
+        weather = json.loads(msg['V'])
+        print('天气：' + weather['date'])
+
     if msg['R'] == 'sensor':
-        print('传感器数据' + str(msg['V']))
+        # sensor = json.loads(msg['V'])
+        sensor = msg['V']
+        print('传感器数据' + str(sensor['T']))
 
     if msg['R'] == 'message':
-        for one in msg['V']:
-            print('收到了消息：\n标题：' + one['title'] + "\n内容：" + one['content'] + "\n")
+        message = msg['V']
+        print(666)
+        print(message)
+        # for one in msg['V']:
+        #     print('收到了消息：\n标题：' + one['title'] + "\n内容：" + one['content'] + "\n")
 
 
 def onOffline():
@@ -28,6 +37,5 @@ def initClient():
     c.connect()
     c.setCallback(onMessage, onOffline)
 
-
-initClient()
-
+if __name__ == '__main__':
+    initClient()
