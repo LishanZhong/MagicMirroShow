@@ -10,17 +10,18 @@ def onMessage(msg):
         print('操作成功完成.')
 
     if msg['R'] == 'weather':
+        global weather
         weather = json.loads(msg['V'])
-        print('天气：' + weather['date'])
+        print(weather)
 
     if msg['R'] == 'sensor':
-        # sensor = json.loads(msg['V'])
+        global sensor
         sensor = msg['V']
-        print('传感器数据' + str(sensor['T']))
+        print(sensor)
 
     if msg['R'] == 'message':
+        global message
         message = msg['V']
-        print(666)
         print(message)
         # for one in msg['V']:
         #     print('收到了消息：\n标题：' + one['title'] + "\n内容：" + one['content'] + "\n")
