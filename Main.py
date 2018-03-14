@@ -1,5 +1,6 @@
 import Client
 import json
+import Show
 
 def onMessage(msg):
     if msg['R'] == 'checkinok':
@@ -20,11 +21,10 @@ def onMessage(msg):
         print(sensor)
 
     if msg['R'] == 'message':
-        global message
         message = msg['V']
-        print(message)
-        # for one in msg['V']:
-        #     print('收到了消息：\n标题：' + one['title'] + "\n内容：" + one['content'] + "\n")
+        global msgListMain
+        Show.msgList.append([message[0]['title'], message[0]['content']])
+        msgListMain = Show.msgList
 
 
 def onOffline():

@@ -75,21 +75,22 @@ class UpdateData(QThread):
             is_rain = Main.sensor['R']
 
             # 果果推送的message
-            msg = Main.message
-
+            msg = Main.msgListMain
             L1 = str(datetime.datetime.now().strftime('%H:%M:%S'))
             L2 = city +'   ' + type +  '   ' + diwen + '—' + gaowen + ' \nPM2.5: ' + str(pm25) + '    ' + quality + '\n实时温度：' + str(wendu_w) + '℃    湿度：'+str(shidu_w) + '%\n' + ganmao
             L3 = './images/'+type+'.png'
-            L4 = '主题:' + msg[0]['title'] + '\n时间：' + msg[0]['updated_at'] + '\n内容：' + msg[0]['content']
-            L5 = '主题:' + msg[1]['title'] + '\n时间：' + msg[1]['updated_at'] + '\n内容：' + msg[1]['content']
+            L4 = '主题:' + msg[-1][0] + '\n内容：' + msg[-1][1]
+            L5 = '主题:' + msg[-2][0] + '\n内容：' + msg[-2][1]
 
             self.update_date.emit(L1, L2, L3, L4, L5)  # 发射信号
 
             time.sleep(1)
 
+msgList = [['', ''], ['李果果', '第二帅']]
+
 if __name__ == '__main__':
     Main.initClient()
-    time.sleep(3)
+    time.sleep(5)
     # pyqt窗口必须在QApplication方法中使用
     app = QtWidgets.QApplication(sys.argv)
     myWin = QtTestWindow()  # 创建自定义的窗体类对象
