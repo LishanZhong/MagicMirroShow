@@ -38,7 +38,6 @@ class Client(object):
 				print('Connected to server.')
 				# 心跳维护线程
 				self.t2.start()
-				print(333333)
 				self.receive()
 				break
 			except Exception as e:

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MagicMirro.iml" filepath="$PROJECT_DIR$/.idea/MagicMirro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MagicMirroShow.iml" filepath="$PROJECT_DIR$/.idea/MagicMirroShow.iml" />
     </modules>
   </component>
 </project>

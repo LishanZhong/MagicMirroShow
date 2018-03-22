@@ -1,12 +1,13 @@
 ﻿import Client
 import json
 import Show
+import Serial
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-
+from Util import handleSerialCmd
 
 def onMessage(msg):
 	if msg['R'] == 'checkinok':
@@ -61,7 +62,8 @@ def onMessage(msg):
 			mirror.addMessage(msg)
 			#print(msg)
 
-
+def onCommand(cmd):
+	handleSerialCmd(cmd)
 
 def onOffline():
 	print("掉线了,尝试重新连接")
@@ -70,7 +72,6 @@ def onOffline():
 
 def initClient():
 	c = Client.Client()
-
 	c.setCallback(onMessage, onOffline)
 
 
@@ -78,6 +79,12 @@ if __name__ == '__main__':
 	app = QtWidgets.QApplication(sys.argv)
 	mirror = Show.Mirror()  # 创建自定义的窗体类对象
 	mirror.show()  # 调用窗口显示
+
+	#开串口
+	serial = Serial.Serial()
+	serial.setCallback(onCommand)
+
+
 	initClient()
 	sys.exit(app.exec_())  # 启动事件循环
 	app.exit()
